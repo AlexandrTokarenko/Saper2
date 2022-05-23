@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.LongConsumer;
 
+//класс отвечающий за время. не знаю, как он работает. нашел в интернете
 public class GameTimer {
 
     private Timer timer;

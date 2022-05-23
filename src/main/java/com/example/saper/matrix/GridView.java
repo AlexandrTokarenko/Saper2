@@ -1,5 +1,6 @@
 package com.example.saper.matrix;
 
+
 public class GridView {
 
     private int[][] grid = new int[12][12];
@@ -14,6 +15,7 @@ public class GridView {
         return grid;
     }
 
+    // элементы массива инициализирует значением 10
     private void fillGrid() {
 
         for (int i = 1; i <= 10; i++) {

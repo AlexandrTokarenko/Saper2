@@ -18,7 +18,7 @@ public class Game {
     private int countFlag;
     private GameTimer gameTimer;
 
-
+    //конструктор
     public Game() {
         this.gridLogic = new GridLogic();
         this.gridView = new GridView();
@@ -31,10 +31,12 @@ public class Game {
         return gameTimer;
     }
 
+    // функция, "открывает" ячейку
     public void selectArea(int x1, int y1, Button button) {
 
         gridView.getGrid()[x1][y1] = gridLogic.getGrid()[x1][y1];
 
+        //если пользователь нажал на ячейку с миной, то массив gridView сохраняет все значения мины
         if (gridView.getGrid()[x1][y1] == 9) {
             for (int i = 1; i <= 10; i++) {
                 for (int j = 1; j <= 10; j++) {
@@ -43,18 +45,21 @@ public class Game {
                     }
                 }
             }
+            // устанавливает состояние IMPOSSIBLE
             moveResult = MoveResult.IMPOSSIBLE;
-            button.setStyle("-fx-background-image: url('file:A:/CourseWork/Saper/SecondSmile.png')");
-            gameTimer.reset();
+            button.setStyle("-fx-background-image: url('file:image/SecondSmile.png')"); // устанавливает стиль грустного смайлика (проигрыш)
+            gameTimer.reset(); // ост. время
         }
 
+        //просматривает всю игровую сетку
         if (Arrays.stream(gridView.getGrid()).allMatch(i -> Arrays.stream(i).allMatch(j -> j != 9))) {
             label:
             for (int i = 1; i <= 10; i++) {
                 for (int j = 1; j <= 10; j++) {
-                    if(gridView.getGrid()[i][j] == 10 && gridLogic.getGrid()[i][j] == 9) {
+                    if(gridView.getGrid()[i][j] == 10 && gridLogic.getGrid()[i][j] == 9) { // если все элементы сетки не есть минами,
+                        // и не есть не нажатым полем
                         moveResult = MoveResult.WIN;
-                    } else if (gridView.getGrid()[i][j] == 10 && gridLogic.getGrid()[i][j] != 9) {
+                    } else if (gridView.getGrid()[i][j] == 10 && gridLogic.getGrid()[i][j] != 9) { // проверяет, есть ли хоть одна не нажатая ячейка
                         moveResult = MoveResult.SIMPLE;
                         break label;
                     }
